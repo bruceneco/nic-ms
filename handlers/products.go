@@ -18,6 +18,8 @@ func (p *Products) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
 		p.getProducts(w)
+	default:
+		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 }
 
