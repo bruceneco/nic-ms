@@ -17,11 +17,14 @@ func NewProducts(l *log.Logger) *Products {
 func (p *Products) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
-		lp := data.GetProducts()
-		err := lp.ToJSON(w)
-		if err != nil {
-			http.Error(w, "Unable to encode json", http.StatusInternalServerError)
-			return
-		}
+		p.getProducts(w)
+	}
+}
+
+func (p *Products) getProducts(w http.ResponseWriter) {
+	lp := data.GetProducts()
+	err := lp.ToJSON(w)
+	if err != nil {
+		http.Error(w, "Unable to encode json", http.StatusInternalServerError)
 	}
 }
