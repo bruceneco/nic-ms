@@ -24,6 +24,7 @@ func (p *Products) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (p *Products) getProducts(w http.ResponseWriter) {
+	w.Header().Add("Content-Type", "application/json")
 	lp := data.GetProducts()
 	err := lp.ToJSON(w)
 	if err != nil {
